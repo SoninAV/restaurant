@@ -1,0 +1,21 @@
+.card {
+    position: relative;
+    border: 1px solid #D58C51;
+    color: white;
+    padding: 40px 20px;
+}
+.title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.description {
+    font-size: 14px;
+    font-weight: 300;
+}
+.cardBottom {
+    width: 260px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 28px;
+}

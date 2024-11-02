@@ -1,0 +1,11 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 42px;
+    background-color: #D58C51;
+    color: black;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+}

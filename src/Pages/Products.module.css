@@ -1,0 +1,12 @@
+.main {
+    background: #161516;
+    padding-bottom: 20px;
+    height: fit-content;
+}
+
+.mainProducts {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}

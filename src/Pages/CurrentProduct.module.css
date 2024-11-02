@@ -1,0 +1,38 @@
+.body {
+    height: 100vh;
+    color: white;
+    background-color: rgb(10, 10, 10);
+    background-image: url('/public/assets/img/background.png');
+    background-size: cover;
+}
+.img {
+    width: 500px;
+    height: 500px;
+    margin-left: 100px;
+}
+.main {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    gap: 200px;
+}
+.productData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.title {
+    font-size: 30px;
+    color: #D58C51;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.price {
+    font-size: 23px;
+}
+.dataBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
