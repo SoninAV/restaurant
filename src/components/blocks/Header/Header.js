@@ -50,7 +50,7 @@ export default function Header({ nameContainer = 'container', forBasket = false,
                     <ButtonCircle
                         symbol={'←'}
                         onClickCircle={() => {
-                            navigate('/')
+                            navigate('/products')
                         }}
                     />
                 </div>

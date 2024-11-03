@@ -1,0 +1,67 @@
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    background-image: url('/public/assets/img/Auth.png');
+    background-size: cover;
+}
+
+.block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 25vw;
+    height: 33vh;
+    background-color: white;
+    padding: 36px 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border: 1px solid #D58C51;
+    border-radius: 60px;
+    font-size: 16px;
+}
+.inputCheckbox {
+    float: left;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: 1px solid #D58C51;
+    border-radius: 60px;
+    font-size: 16px;
+}
+.label {
+    font-size: 12px;
+    font-weight: 300;
+    color: #301411;
+}
+
+.button {
+    margin: auto;
+    width: 200px;
+    padding: 12px 22px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #D58C51;
+}
+
+.link {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    color: #D58C51;
+    text-decoration: underline;
+}
