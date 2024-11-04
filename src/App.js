@@ -6,16 +6,16 @@ import Basket from './Pages/Basket';
 import CurrentProduct from './Pages/CurrentProduct';
 import Register from './components/blocks/Register/Register';
 import Login from './components/blocks/Login/Login';
-import { useSelector } from 'react-redux';
+import Private from './components/blocks/Private';
 
 function App() {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
   return (
     <Router>
       <Routes>
-        <Route path="/products" element={<Products/>} />
-        <Route path="/basket" element={<Basket />} />
-        <Route path="/:id" element={<CurrentProduct />} />
+        <Route path="/products" element={<Private Component={Products} />} />
+        <Route path="/basket" element={<Private Component={Basket} />} />
+        <Route path="/:id" element={<Private Component={CurrentProduct} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route

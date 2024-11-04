@@ -37,7 +37,7 @@ const Register = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
-                {error1 && <div className={styles.error}>{error1}</div>}
+                {/* {error1 && <div className={styles.error}>{error1}</div>} */}
                 <input
                     className={styles.input}
                     type="password"
