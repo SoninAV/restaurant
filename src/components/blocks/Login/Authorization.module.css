@@ -35,14 +35,7 @@
     border-radius: 60px;
     font-size: 16px;
 }
-.inputCheckbox {
-    float: left;
-    margin-right: 10px;
-    padding: 10px 20px;
-    border: 1px solid #D58C51;
-    border-radius: 60px;
-    font-size: 16px;
-}
+
 .label {
     font-size: 12px;
     font-weight: 300;
@@ -64,4 +57,69 @@
     right: 20px;
     color: #D58C51;
     text-decoration: underline;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 4px;
+    margin-left: 20px;
+}
+
+/* Скрываем стандартный чекбокс */
+.checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Создаем кастомный чекбокс */
+.checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #D58C51;
+    vertical-align: middle;
+}
+
+/* Добавляем стили для состояния "checked" */
+.checkbox:checked + .checkmark {
+    background-color: rgb(222, 222, 222);
+}
+
+/* Стили для галочки внутри круглого чекбокса */
+.customCheckbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid #D58C51;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Показываем эффект (галочку) для состояния "checked" */
+.checkbox:checked + .checkmark:after {
+    display: block;
+}
+
+.checkboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.checkboxText {
+    cursor: default;
+    font-weight: 300;
+    font-size: 12px;
 }

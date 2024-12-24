@@ -1,104 +1,88 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isAuthenticated: JSON.parse(localStorage.getItem('isAuthenticated')) || false,
+    isRegistred: JSON.parse(localStorage.getItem('isRegistred')) || false,
     users: JSON.parse(localStorage.getItem('users')) || [],
-    error: "error",
-    error1: null
+    error: "Введите данные",
+    previousInput: {
+        username: '',
+        password: '',
+    },
 };
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        register: (state, action) => {
+        registerUser: (state, action) => {
             const { username, password } = action.payload;
-            
-            if (username.length < 4) {
-                state.error1 = 'Поле должно содержать не менее 4-х символов'
-                return
-            }
-            
-            if (password.length < 4) {
-                state.error1 = 'Поле должно содержать не менее 4-х символов'
-                return
-            }
-            
-            let storedUsers;
-            try {
-                storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-            } catch (error) {
-                console.error('Error parsing users from local storage', error);
-                storedUsers = [];
-                return
-            }
-            
-            const userExists = storedUsers.some(user => user.username === username);
-            if (userExists) {
-                state.error = 'Пользователь уже существует'
-                return
-            }
-            
-            const user = { username, password};
-            storedUsers.push(user);
-            
-            try {
-                localStorage.setItem('users', JSON.stringify(storedUsers));
-            } catch (error) {
-                state.error = error
-                console.error('Error saving users to local storage', error);
-                return
-            }
-            state.users = storedUsers;
-            state.error = null;
-            state.error1 = null;
-            return true;
-        },
         
-        login: (state, action) => {
+            // Проверка длины имени и пароля
+            if (username.length < 4 || password.length < 4) {
+                state.error = 'Поле должно содержать не менее 4-х символов';
+                return;
+            }
+        
+            // Проверка на совпадение с предыдущим вводом
+            if (state.previousInput.username === username && state.previousInput.password === password) {
+                let storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+                const userExists = storedUsers.some(user => user.username === username);
+        
+                if (userExists) {
+                    state.error = 'Пользователь уже существует';
+                    return;
+                }
+        
+                const user = { username, password };
+                storedUsers.push(user);
+        
+                try {
+                    localStorage.setItem('users', JSON.stringify(storedUsers));
+                    state.users = storedUsers;
+                    state.previousInput.username = "";
+                    state.previousInput.password = "";
+                    state.error = null;
+                } catch (error) {
+                    console.error('Error saving users to local storage', error);
+                    state.error = 'Ошибка сохранения пользователей';
+                }
+            } else {
+                // Сохранение текущего ввода для последующей проверки
+                state.previousInput = { username, password };
+                state.error = 'Повторите ввод для подтверждения';
+            }
+        },
+
+        loginUser: (state, action) => {
             const { username, password } = action.payload;
-            
-            if (username.length < 4) {
-                state.error1 = 'Поле должно содержать не менее 4-х символов'
-                return
+
+            if (username.length < 4 || password.length < 4) {
+                state.error = 'Поле должно содержать не менее 4-х символов';
+                return;
             }
-            
-            if (password.length < 4) {
-                state.error1 = 'Поле должно содержать не менее 4-х символов'
-                return
-            }
-            
-            let storedUsers;
-            try {
-                storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-            } catch (error) {
-                storedUsers = []
-                return
-            }
-            
+
+            let storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
             const user = storedUsers.find(
                 (user) => user.username === username && user.password === password
-            )
+            );
 
-            try {
-                if (user) {
-                    state.isAuthenticated = true;
-                    localStorage.setItem('isAuthenticated', JSON.stringify(true));
-                } else {
-                    throw new Error('Invalid credentials');
-                }
-            } catch (error) {
-                return
+            if (user) {
+                state.isAuthenticated = true;
+                localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                state.error = null;
+            } else {
+                state.error = 'Неверные учетные данные';
             }
-            state.error = null
-            state.error1 = null
         },
-        logout: (state) => {
+
+        logoutUser: (state) => {
             state.isAuthenticated = false;
             localStorage.setItem('isAuthenticated', JSON.stringify(false));
         }
     },
 });
 
-export const { register, login, logout } = authSlice.actions;
+export const { registerUser, loginUser, logoutUser } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,5 +1,5 @@
 import styles from "./ButtonExit.module.css"
-import { logout } from "../../../store/features/authSlice/authSlice"
+import { logoutUser } from "../../../store/features/authSlice/authSlice"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
@@ -10,10 +10,11 @@ export default function ButtonExit() {
         <button
             className={styles.button}
             onClick={() => {
-                dispatch(logout())
+                dispatch(logoutUser())
                 navigate('/')
-
-            }}
-        >Выйти</button>
+        }}
+        >
+            Выйти
+        </button>
     )
 }
